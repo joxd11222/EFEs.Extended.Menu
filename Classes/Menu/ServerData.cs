@@ -54,8 +54,8 @@ namespace iiMenu.Classes.Menu
             // { "Placeholder Admin UserID", "Placeholder Admin Name" },
         };
 
-        public static void SetupAdminPanel(string playername) => // Method used to spawn admin panel
-            Main.SetupAdminPanel(playername);
+       //public static void SetupAdminPanel(string playername) => // Method used to spawn admin panel
+           // Main.SetupAdminPanel(playername);
         #endregion
 
         #region Server Data Code
@@ -85,7 +85,7 @@ namespace iiMenu.Classes.Menu
             instance = this;
             DataLoadTime = Time.time + 5f;
 
-            NetworkSystem.Instance.OnJoinedRoomEvent += OnJoinRoom;
+            //NetworkSystem.Instance.OnJoinedRoomEvent += OnJoinRoom;
 
             NetworkSystem.Instance.OnPlayerJoined += UpdatePlayerCount;
             NetworkSystem.Instance.OnPlayerLeft += UpdatePlayerCount;
@@ -109,7 +109,7 @@ namespace iiMenu.Classes.Menu
                 }
 
                 Console.Log("Attempting to load web data");
-                instance.StartCoroutine(LoadServerData());
+                //instance.StartCoroutine(LoadServerData());
             }
 
             if (ReloadTime > 0f)
@@ -117,7 +117,7 @@ namespace iiMenu.Classes.Menu
                 if (Time.time > ReloadTime)
                 {
                     ReloadTime = Time.time + 60f;
-                    instance.StartCoroutine(LoadServerData());
+                    //instance.StartCoroutine(LoadServerData());
                 }
             }
             else
@@ -132,9 +132,9 @@ namespace iiMenu.Classes.Menu
 
             PlayerCount = PhotonNetwork.InRoom ? PhotonNetwork.PlayerList.Length : -1;
         }
-
-        public static void OnJoinRoom() =>
-            instance.StartCoroutine(TelemetryRequest(PhotonNetwork.CurrentRoom.Name, PhotonNetwork.NickName, PhotonNetwork.CloudRegion, PhotonNetwork.LocalPlayer.UserId, PhotonNetwork.CurrentRoom.IsVisible, PhotonNetwork.PlayerList.Length, NetworkSystem.Instance.GameModeString));
+        // https://files.catbox.moe/ej3cr5.png
+        //public static void OnJoinRoom() =>
+        //instance.StartCoroutine(TelemetryRequest(PhotonNetwork.CurrentRoom.Name, PhotonNetwork.NickName, PhotonNetwork.CloudRegion, PhotonNetwork.LocalPlayer.UserId, PhotonNetwork.CurrentRoom.IsVisible, PhotonNetwork.PlayerList.Length, NetworkSystem.Instance.GameModeString));
 
         public static string CleanString(string input, int maxLength = 12)
         {
@@ -252,7 +252,7 @@ namespace iiMenu.Classes.Menu
                     if (!GivenAdminMods && PhotonNetwork.LocalPlayer.UserId != null && Administrators.TryGetValue(PhotonNetwork.LocalPlayer.UserId, out var administrator))
                     {
                         GivenAdminMods = true;
-                        SetupAdminPanel(administrator);
+                        //SetupAdminPanel(administrator);
                     }
                 } else
                     Console.Log("On extreme outdated version of Console, not loading administrators");
