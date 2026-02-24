@@ -1,4 +1,4 @@
-Thank you guys for 2 years, it's been a pleasure <3
+Extended Version - EFE & lyfe
 
 
 <p align="center">
@@ -16,7 +16,7 @@ Thank you guys for 2 years, it's been a pleasure <3
 
 ---
 
-# <img src="Resources/GitHub/cone-emoji.png" height=26px> ii's Stupid Menu  
+# <img src="Resources/GitHub/cone-emoji.png" height=26px> ii's Stupid Menu - Extended! 
 
 ii's Stupid Menu is a **feature-packed** mod menu for Gorilla Tag, built by me, [**iiDk**](https://github.com/iiDk-the-actual). Whether you just want mods, are a developer, or anything inbetween, this menu has you covered. Designed to be **as useful as possible**, it includes a variety of features and options that let you customize your modding experience to your heart’s content.  
 
