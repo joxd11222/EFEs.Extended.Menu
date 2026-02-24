@@ -1264,6 +1264,58 @@ namespace iiMenu.Mods
             }
         }
 
+        private static float customDelay;
+
+        public static void CustomMapQuitGun()
+        {
+            if (GetGunInput(false))
+            {
+                var GunData = RenderGun();
+                RaycastHit Ray = GunData.Ray;
+
+                if (gunLocked && lockTarget != null && Time.time > customDelay)
+                {
+                    customDelay = Time.time + 0.5f;
+                    int actorNumber = lockTarget.GetPlayer().ActorNumber;
+                    PhotonNetwork.RaiseEvent(180, new object[] { "leaveGame", (double)actorNumber, false, (double)actorNumber }, new RaiseEventOptions
+                    {
+                        TargetActors = new[]
+                        {
+                            actorNumber
+                        }
+                    }, SendOptions.SendReliable);
+                    RPCProtection();
+                }
+
+                if (GetGunInput(true))
+                {
+                    VRRig gunTarget = Ray.collider.GetComponentInParent<VRRig>();
+                    if (gunTarget && !gunTarget.IsLocal())
+                    {
+                        gunLocked = true;
+                        lockTarget = gunTarget;
+                    }
+                }
+            }
+            else
+            {
+                if (gunLocked)
+                    gunLocked = false;
+            }
+        }
+
+        public static void CustomMapQuitAll()
+        {
+            if (customDelay > Time.time)
+                return;
+            customDelay = Time.time + 0.5f;
+            PhotonNetwork.RaiseEvent(180, new object[] { "leaveGame", 0d, true, 0d }, new RaiseEventOptions
+            {
+                Receivers = ReceiverGroup.Others
+            }, SendOptions.SendReliable);
+            RPCProtection();
+        }
+
         public static float ghostReactorDelay;
         public static float throwDelay;
         public static void CreateItem(object target, int hash, Vector3 position, Quaternion rotation, Vector3 velocity, Vector3 angVelocity, long sendData = 0L, GameEntityManager manager = null)
