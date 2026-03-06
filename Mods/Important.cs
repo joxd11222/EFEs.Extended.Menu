@@ -693,6 +693,9 @@ exit";
             ConnectedControllerHandler.Instance.overrideLeftEnable = true;
             ConnectedControllerHandler.Instance.overrideRightEnable = true;
 
+            ControllerInputPoller.instance.leftControllerIsValid = true;
+            ControllerInputPoller.instance.rightControllerIsValid = true;
+
             ConnectedControllerHandler.Instance.rightXRController.enabled = true;
             ConnectedControllerHandler.Instance.leftXRController.enabled = true;
 
