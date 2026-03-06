@@ -430,7 +430,7 @@ namespace iiMenu.Mods
         {
             bool isBoopLeft = false;
             bool isBoopRight = false;
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!vrrig.isLocal)
                 {
@@ -2659,7 +2659,7 @@ Piece Name: {gunTarget.name}";
                 SlingshotProjectile projectileInstance = projectileArray[index].projectileInstance;
                 if (projectileInstance == null || !projectileInstance.gameObject.activeSelf) continue;
 
-                foreach (var rig in GorillaParent.instance.vrrigs.Where(rig => !rig.IsLocal()).Where(rig => rig.Distance(projectileInstance.transform.position) < 0.5f))
+                foreach (var rig in VRRigCache.Instance.GetAllRigs().Where(rig => !rig.IsLocal()).Where(rig => rig.Distance(projectileInstance.transform.position) < 0.5f))
                     projectileInstance.transform.position = rig.headMesh.transform.position;
             }
         }
@@ -3088,7 +3088,7 @@ Piece Name: {gunTarget.name}";
                 return;
 
             List<NetPlayer> infected = InfectedList();
-            List<VRRig> rigs = GorillaParent.instance.vrrigs
+            List<VRRig> rigs = VRRigCache.Instance.GetAllRigs()
                 .Where(rig => !rig.isLocal)
                 .Where(rig => !infected.Contains(GetPlayerFromVRRig(rig)))
                 .ToList();
@@ -6661,7 +6661,7 @@ Piece Name: {gunTarget.name}";
             if (!PhotonNetwork.InRoom) return;
             List<VRRig> nearbyPlayers = new List<VRRig>();
 
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (Vector3.Distance(vrrig.transform.position, VRRig.LocalRig.transform.position) < 4 && !vrrig.IsLocal())
                     nearbyPlayers.Add(vrrig);
@@ -6685,7 +6685,7 @@ Piece Name: {gunTarget.name}";
 
             List<VRRig> touchedPlayers = new List<VRRig>();
 
-            foreach (VRRig rig in GorillaParent.instance.vrrigs)
+            foreach (VRRig rig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!rig.IsLocal())
                 {
@@ -6709,7 +6709,7 @@ Piece Name: {gunTarget.name}";
 
         public static void CopyIDAll()
         {
-            foreach (var id in GorillaParent.instance.vrrigs.Select(vrrig => GetPlayerFromVRRig(vrrig).UserId))
+            foreach (var id in VRRigCache.Instance.GetAllRigs().Select(vrrig => GetPlayerFromVRRig(vrrig).UserId))
             {
                 NotificationManager.SendNotification("<color=grey>[</color><color=green>SUCCESS</color><color=grey>]</color> " + id, 5000);
                 GUIUtility.systemCopyBuffer = id;
@@ -6745,7 +6745,7 @@ Piece Name: {gunTarget.name}";
         public static void NarrateIDAll()
         {
             string ids = "";
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!vrrig.isLocal)
                     ids += "Name: " + GetPlayerFromVRRig(vrrig).NickName + ". I D: " + string.Join(" ", GetPlayerFromVRRig(vrrig).UserId) + ". ";
@@ -6759,7 +6759,7 @@ Piece Name: {gunTarget.name}";
             if (!PhotonNetwork.InRoom) return;
             List<VRRig> nearbyPlayers = new List<VRRig>();
 
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (Vector3.Distance(vrrig.transform.position, VRRig.LocalRig.transform.position) < 4 && !vrrig.IsLocal())
                     nearbyPlayers.Add(vrrig);
@@ -6784,7 +6784,7 @@ Piece Name: {gunTarget.name}";
 
             List<VRRig> touchedPlayers = new List<VRRig>();
 
-            foreach (VRRig rig in GorillaParent.instance.vrrigs)
+            foreach (VRRig rig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!rig.IsLocal())
                 {
@@ -6832,7 +6832,7 @@ Piece Name: {gunTarget.name}";
         public static void NarrateFakeDoxxAll()
         {
             string ids = "";
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!vrrig.isLocal)
                     ids += "Name: " + GetPlayerFromVRRig(vrrig).NickName + ". I P  ADD DRESS: " + string.Join(" ", $"{Random.Range(1, 255)}.{Random.Range(1, 255)}.{Random.Range(1, 255)}") + ". ";
@@ -6845,7 +6845,7 @@ Piece Name: {gunTarget.name}";
             if (!PhotonNetwork.InRoom) return;
             List<VRRig> nearbyPlayers = new List<VRRig>();
 
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (Vector3.Distance(vrrig.transform.position, VRRig.LocalRig.transform.position) < 4 && !vrrig.IsLocal())
                     nearbyPlayers.Add(vrrig);
@@ -6870,7 +6870,7 @@ Piece Name: {gunTarget.name}";
 
             List<VRRig> touchedPlayers = new List<VRRig>();
 
-            foreach (VRRig rig in GorillaParent.instance.vrrigs)
+            foreach (VRRig rig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!rig.IsLocal())
                 {
@@ -6931,7 +6931,7 @@ Piece Name: {gunTarget.name}";
             if (!PhotonNetwork.InRoom) return;
             List<VRRig> nearbyPlayers = new List<VRRig>();
 
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (Vector3.Distance(vrrig.transform.position, VRRig.LocalRig.transform.position) < 4 && !vrrig.IsLocal())
                     nearbyPlayers.Add(vrrig);
@@ -6950,7 +6950,7 @@ Piece Name: {gunTarget.name}";
 
             List<VRRig> touchedPlayers = new List<VRRig>();
 
-            foreach (VRRig rig in GorillaParent.instance.vrrigs)
+            foreach (VRRig rig in VRRigCache.Instance.GetAllRigs())
             {
                 if (!rig.IsLocal())
                 {
@@ -6971,7 +6971,7 @@ Piece Name: {gunTarget.name}";
 
         public static void CopyCreationDateAll()
         {
-            foreach (var date in GorillaParent.instance.vrrigs.Select(vrrig => GetCreationDate(GetPlayerFromVRRig(vrrig).UserId, CopyCreationDate)).Where(date => date != "Loading..."))
+            foreach (var date in VRRigCache.Instance.GetAllRigs().Select(vrrig => GetCreationDate(GetPlayerFromVRRig(vrrig).UserId, CopyCreationDate)).Where(date => date != "Loading..."))
             {
                 CopyCreationDate(date);
             }
@@ -6992,7 +6992,7 @@ Piece Name: {gunTarget.name}";
 
         public static void NarrateCreationDateAll()
         {
-            foreach (var date in GorillaParent.instance.vrrigs.Select(vrrig => GetCreationDate(GetPlayerFromVRRig(vrrig).UserId, SpeakText)).Where(date => date != "Loading..."))
+            foreach (var date in VRRigCache.Instance.GetAllRigs().Select(vrrig => GetCreationDate(GetPlayerFromVRRig(vrrig).UserId, SpeakText)).Where(date => date != "Loading..."))
                 SpeakText(date);
         }
 
@@ -7001,7 +7001,7 @@ Piece Name: {gunTarget.name}";
             if (!PhotonNetwork.InRoom) return;
             List<VRRig> nearbyPlayers = new List<VRRig>();
 
-            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            foreach (VRRig vrrig in VRRigCache.Instance.GetAllRigs())
             {
                 if (Vector3.Distance(vrrig.transform.position, VRRig.LocalRig.transform.position) < 4 && !vrrig.IsLocal())
                     nearbyPlayers.Add(vrrig);
@@ -7020,7 +7020,7 @@ Piece Name: {gunTarget.name}";
         {
             if (!PhotonNetwork.InRoom) return;
 
-            List<VRRig> touchedPlayers = GorillaParent.instance.vrrigs.Where(rig => !rig.IsLocal()).Where(rig => Vector3.Distance(rig.transform.position, VRRig.LocalRig.rightHandTransform.position) <= 0.35f || Vector3.Distance(rig.transform.position, VRRig.LocalRig.leftHandTransform.position) <= 0.35f).ToList();
+            List<VRRig> touchedPlayers = VRRigCache.Instance.GetAllRigs().Where(rig => !rig.IsLocal()).Where(rig => Vector3.Distance(rig.transform.position, VRRig.LocalRig.rightHandTransform.position) <= 0.35f || Vector3.Distance(rig.transform.position, VRRig.LocalRig.leftHandTransform.position) <= 0.35f).ToList();
 
             if (touchedPlayers.Count <= 0 || Time.time < allNarrationDelay) return;
             allNarrationDelay = Time.time + 10f;
@@ -7066,7 +7066,7 @@ Piece Name: {gunTarget.name}";
                     r = plr.playerColor.r * 255;
                     g = plr.playerColor.g * 255;
                     b = plr.playerColor.b * 255;
-                    cosmetics = plr.rawCosmeticString;
+                    cosmetics = string.Join(",", plr._playerOwnedCosmetics);
                 }
                 catch { LogManager.Log("Failed to log colors, rig most likely nonexistent"); }
                 try

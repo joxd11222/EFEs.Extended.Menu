@@ -38,7 +38,7 @@ namespace iiMenu.Patches.Menu
             if (enabled && __instance.blaster.LocalEquippedOrActivated)
             {
                 List<NetPlayer> infected = InfectedList();
-                List<VRRig> rigs = GorillaParent.instance.vrrigs
+                List<VRRig> rigs = VRRigCache.Instance.GetAllRigs()
                     .Where(rig => !rig.isLocal)
                     .Where(rig => !infected.Contains(rig.GetPlayer()))
                     .ToList();

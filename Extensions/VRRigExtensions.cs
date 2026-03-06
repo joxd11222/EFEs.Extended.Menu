@@ -57,7 +57,7 @@ namespace iiMenu.Extensions
             int suspiciouslySteam = 0;
             int suspiciouslyPC = 0;
             int suspiciouslyQuest = 0;
-            string concatStringOfCosmeticsAllowed = rig.rawCosmeticString;
+            string concatStringOfCosmeticsAllowed = string.Join(",", rig._playerOwnedCosmetics);
 
             if (concatStringOfCosmeticsAllowed.Contains("S. FIRST LOGIN"))
                 suspiciouslySteam++;
@@ -107,7 +107,7 @@ namespace iiMenu.Extensions
         }
 
         public static bool Active(this VRRig rig) =>
-            rig != null && GorillaParent.instance.vrrigs.Contains(rig);
+            rig != null && VRRigCache.Instance.GetAllRigs().Contains(rig);
 
         public static float Distance(this VRRig rig, Vector3 position) =>
             Vector3.Distance(rig.transform.position, position);
@@ -119,7 +119,7 @@ namespace iiMenu.Extensions
             rig.Distance(GorillaTagger.Instance.bodyCollider.transform.position);
 
         public static VRRig GetClosest(this VRRig rig) =>
-            GorillaParent.instance.vrrigs.Where(targetRig => targetRig != null && targetRig != rig)
+            VRRigCache.Instance.GetAllRigs().Where(targetRig => targetRig != null && targetRig != rig)
                                          .OrderBy(rig.Distance)
                                          .FirstOrDefault();
 
